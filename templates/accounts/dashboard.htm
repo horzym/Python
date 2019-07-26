@@ -13,31 +13,25 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Property</th>
+                    <th scope="col">Contact date</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  {%if user_contact %}
+                  {%for us in user_contact%}
                   <tr>
-                    <td>22</td>
-                    <td>45 Drivewood Circle</td>
-                    <td>
-                      <a class="btn btn-light" href="#">View Listing</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>43</td>
-                    <td>22 Westbrook rd</td>
-                    <td>
-                      <a class="btn btn-light" href="#">View Listing</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>31</td>
-                    <td>12 Samson Ave</td>
-                    <td>
-                      <a class="btn btn-light" href="#">View Listing</a>
-                    </td>
-                  </tr>
+                      <td>{{us.id}}</td>
+                      <td>{{us.listing}}</td>
+                      <td>{{us.contact_date}}</td>
+                      <td>
+                        <a class="btn btn-light" href="{%url 'listing' us.listing_id%}">View</a>
+                      </td>
+                    </tr>
+                  {%endfor%}
+                  {%else%}
+                  {%endif%}
+                  
                 </tbody>
               </table>
             </div>

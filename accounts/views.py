@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from contacts.models import Contact
+from listings.models import Listing
 # Create your views here.
 def register(request):
     if request.method == 'POST':
@@ -59,5 +61,13 @@ def logout(request):
     return redirect('index')
 
 def dashboard(request):
+    if request.user.is_authenticated:
+        user_contact = Contact.objects.all().filter(user_id=request.user.id)
+        
+        context={
+            'user_contact' : user_contact,
+        }
+        return render(request,'accounts/dashboard.htm',context)
+    else:
+        return redirect('index')
     
-    return render(request,'accounts/dashboard.htm')
